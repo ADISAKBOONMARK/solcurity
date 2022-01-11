@@ -66,23 +66,23 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 
 ## Code
 
-- `C1` - Using SafeMath or 0.8 checked math? (SWC-101)
+- `C1` - Using SafeMath or Solidity 0.8.x checked math? ([SWC-101](https://swcregistry.io/docs/SWC-101))
 - `C2` - Are any storage slots read multiple times?
-- `C3` - Are any unbounded loops/arrays used that can cause DoS? (SWC-128)
-- `C4` - Use `block.timestamp` only for long intervals. (SWC-116)
-- `C5` - Don't use block.number for elapsed time. (SWC-116)
-- `C7` - Avoid delegatecall wherever possible, especially to external (even if trusted) contracts. (SWC-112)
+- `C3` - Are any unbounded loops/arrays used that can cause DoS? ([SWC-128](https://swcregistry.io/docs/SWC-128))
+- `C4` - Use `block.timestamp` only for long intervals. ([SWC-116](https://swcregistry.io/docs/SWC-116))
+- `C5` - Don't use block.number for elapsed time. ([SWC-116](https://swcregistry.io/docs/SWC-116))
+- `C7` - Avoid delegatecall wherever possible, especially to external (even if trusted) contracts. ([SWC-112](https://swcregistry.io/docs/SWC-112))
 - `C8` - Do not update the length of an array while iterating over it.
-- `C9` - Don't use `blockhash()`, etc for randomness. (SWC-120)
-- `C10` - Are signatures protected against replay with a nonce and `block.chainid` (SWC-121)
-- `C11` - Ensure all signatures use EIP-712. (SWC-117 SWC-122)
-- `C12` - Output of `abi.encodePacked()` shouldn't be hashed if using >2 dynamic types. Prefer using `abi.encode()` in general. (SWC-133)
-- `C13` - Careful with assembly, don't use any arbitrary data. (SWC-127)
-- `C14` - Don't assume a specific ETH balance. (SWC-132)
-- `C15` - Avoid insufficient gas griefing. (SWC-126)
-- `C16` - Private data isn't private. (SWC-136)
+- `C9` - Don't use `blockhash()`, etc for randomness. ([SWC-120](https://swcregistry.io/docs/SWC-120))
+- `C10` - Are signatures protected against replay with a nonce and `block.chainid` ([SWC-121](https://swcregistry.io/docs/SWC-121))
+- `C11` - Ensure all signatures use EIP-712. ([SWC-117](https://swcregistry.io/docs/SWC-117) [SWC-122](https://swcregistry.io/docs/SWC-122))
+- `C12` - Output of `abi.encodePacked()` shouldn't be hashed if using >2 dynamic types. Prefer using `abi.encode()` in general. ([SWC-133](https://swcregistry.io/docs/SWC-133))
+- `C13` - Careful with assembly, don't use any arbitrary data. ([SWC-127](https://swcregistry.io/docs/SWC-127))
+- `C14` - Don't assume a specific ETH balance. ([SWC-132](https://swcregistry.io/docs/SWC-132))
+- `C15` - Avoid insufficient gas griefing. ([SWC-126](https://swcregistry.io/docs/SWC-126))
+- `C16` - Private data isn't private. ([SWC-136](https://swcregistry.io/docs/SWC-136))
 - `C17` - Updating a struct/array in memory won't modify it in storage.
-- `C18` - Never shadow state variables. (SWC-119)
+- `C18` - Never shadow state variables. ([SWC-119](https://swcregistry.io/docs/SWC-119))
 - `C19` - Do not mutate function parameters.
 - `C20` - Is calculating a value on the fly cheaper than storing it?
 - `C21` - Are all state variables read from the correct contract (master vs. clone)?
@@ -90,13 +90,13 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `C23` - Are logical operators used correctly (`==`, `!=`, `&&`, `||`, `!`), especially to prevent off-by-one errors?
 - `C24` - Always multiply before dividing, unless the multiplication could overflow.
 - `C25` - Are magic numbers replaced by a constant with an intuitive name?
-- `C26` - If the recipient of ETH had a fallback function that reverted, could it cause DoS? (SWC-113)
+- `C26` - If the recipient of ETH had a fallback function that reverted, could it cause DoS? ([SWC-113](https://swcregistry.io/docs/SWC-113))
 - `C27` - Use SafeERC20 or check return values safely.
 - `C28` - Don't use `msg.value` in a loop.
 - `C29` - Don't use `msg.value` if recursive delegatecalls are possible (like if the contract inherits `Multicall`/`Batchable`).
 - `C30` - Don't assume `msg.sender` is always a relevant user.
-- `C31` - Don't use `assert()` unless for fuzzing or formal verification. (SWC-110)
-- `C32` - Don't use `tx.origin` for authorization. (SWC-115)
+- `C31` - Don't use `assert()` unless for fuzzing or formal verification. ([SWC-110](https://swcregistry.io/docs/SWC-110))
+- `C32` - Don't use `tx.origin` for authorization. ([SWC-115](https://swcregistry.io/docs/SWC-115)) 
 - `C33` - Don't use `address.transfer()` or `address.send()`. Use `.call.value(...)("")` instead. (SWC-134)
 - `C34` - When using low-level calls, ensure the contract exists before calling.
 - `C35` - When calling a function with many parameters, use the named argument syntax.
