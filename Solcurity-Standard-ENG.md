@@ -46,24 +46,23 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `F5` - Validate all parameters are within safe bounds, even if the function can only be called by a trusted users. 
 - `F6` - Is the checks before effects pattern followed? ([SWC-107](https://swcregistry.io/docs/SWC-107))
 - `F7` - Check for front-running possibilities, such as the approve function. ([SWC-114](https://swcregistry.io/docs/SWC-107))
-- `F8` - Is insufficient gas griefing possible? ([SWC-126](https://swcregistry.io/docs/SWC-107))
+- `F8` - Is insufficient gas griefing possible? ([SWC-126](https://swcregistry.io/docs/SWC-126))
 - `F9` - Are the correct modifiers applied, such as `onlyOwner`/`requiresAuth`?
 - `F10` - Are return values always assigned?
 - `F11` - Write down and test invariants about state before a function can run correctly.
 - `F12` - Write down and test invariants about the return or any changes to state after a function has run.
 - `F13` - Take care when naming functions, because people will assume behavior based on the name.
-- `F14` - If a function is intentionally unsafe (to save gas, etc), use an unwieldy name to draw attention to its risk.
-- `F15` - Are all arguments, return values, side effects and other information documented using natspec?
-- `F16` - If the function allows operating on another user in the system, do not assume `msg.sender` is the user being operated on.
-- `F17` - If the function requires the contract be in an uninitialized state, check an explicit `initialized` variable. Do not use `owner == address(0)` or other similar checks as substitutes.
-- `F18` - Only use `private` to intentionally prevent child contracts from calling the function, prefer `internal` for flexibility.
-- `F19` - Use `virtual` if there are legitimate (and safe) instances where a child contract may wish to override the function's behavior.
+- `F14` - Are all arguments, return values, side effects and other information documented using [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html)?
+- `F15` - If the function allows operating on another user in the system, do not assume `msg.sender` is the user being operated on.
+- `F16` - If the function requires the contract be in an uninitialized state, check an explicit `initialized` variable. Do not use `owner == address(0)` or other similar checks as substitutes.
+- `F17` - Only use `private` to intentionally prevent child contracts from calling the function, prefer `internal` for flexibility.
+- `F18` - Use `virtual` if there are legitimate (and safe) instances where a child contract may wish to override the function's behavior.
 
 ## Modifiers
 
 - `M1` - Are no storage updates made (except in a reentrancy lock)?
 - `M2` - Are external calls avoided?
-- `M3` - Is the purpose of the modifier and other important information documented using natspec?
+- `M3` - Is the purpose of the modifier and other important information documented using [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html)?
 
 ## Code
 

@@ -44,27 +44,26 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `F2` - ควรเป็น `internal` หรือไม่ ?
 - `F3` - ควรเป็น `payable` หรือไม่ ?
 - `F4` - สามารถใช้งานร่วมกับ Function อื่น ๆ ได้ถูกต้องหรือไม่ ?
-- `F5` - ตรวจสอบความถูกต้องของการ Validate all parameters ว่าทำได้ถูกต้องหรือไม่ แม้ว่า Function จะสามารถเรียกได้เฉพาะบุคคลที่เชื่อถึอได้ เช่น Owner, Admin, Operation เป็นต้น
-- `F6` - Is the checks before effects pattern followed? (SWC-107)
-- `F7` - Check for front-running possibilities, such as the approve function. (SWC-114)
-- `F8` - Is insufficient gas griefing possible? (SWC-126)
-- `F9` - Are the correct modifiers applied, such as `onlyOwner`/`requiresAuth`?
-- `F10` - Are return values always assigned?
-- `F11` - Write down and test invariants about state before a function can run correctly.
-- `F12` - Write down and test invariants about the return or any changes to state after a function has run.
-- `F13` - Take care when naming functions, because people will assume behavior based on the name.
-- `F14` - If a function is intentionally unsafe (to save gas, etc), use an unwieldy name to draw attention to its risk.
-- `F15` - Are all arguments, return values, side effects and other information documented using natspec?
-- `F16` - If the function allows operating on another user in the system, do not assume `msg.sender` is the user being operated on.
-- `F17` - If the function requires the contract be in an uninitialized state, check an explicit `initialized` variable. Do not use `owner == address(0)` or other similar checks as substitutes.
-- `F18` - Only use `private` to intentionally prevent child contracts from calling the function, prefer `internal` for flexibility.
-- `F19` - Use `virtual` if there are legitimate (and safe) instances where a child contract may wish to override the function's behavior.
+- `F5` - ตรวจสอบความถูกต้องของการ Validate all parameters ว่าทำได้ถูกต้องหรือไม่ แม้ว่า Function จะสามารถเรียกได้เฉพาะบุคคลที่เชื่อถึอได้ เช่น Owner, Admin, Operator เป็นต้น
+- `F6` - ตรวจสอบผลกระทบว่าเป็นไปตามเงื่อนไขหรือไม่ ? ([SWC-107](https://swcregistry.io/docs/SWC-107))
+- `F7` - ตรวจสอบการทำงานของ Function ที่มีผลการทำงานต่อเนื่องกัน ว่ามีความเสี่ยงที่จะถูกโจมตีหรือไม่ ([SWC-114](https://swcregistry.io/docs/SWC-107))
+- `F8` - ปัญหา Gas ไม่เพียงพอเมือต้องทำการเรียกใช้งาน Smartcontracts มากกว่า 1 ใบ ([SWC-126](https://swcregistry.io/docs/SWC-126))
+- `F9` - Modifiers ทำงานถูกต้องหรือไม่ เช่น `onlyOwner`, `requiresAuth` เป็นต้น
+- `F10` - การ Return ค่า ถูกต้องตามที่กำหนดหรือไม่ ?
+- `F11` - เขียน Test สำหรับตรวจสอบค่าตัวแปรก่อนที่จะเรียก Function ในการเปลี่ยนแปลงค่า
+- `F12` - เขียน Test สำหรับตรวจสอบค่าตัวแปรหลังจากเรียก Function ในการเปลี่ยนแปลงค่า
+- `F13` - ใส่ใจในการตั้งชื่อ Function เพราะจะทำให้คนทั่วไปเข้าใจการทำงานของ Function ที่ควรจะเป็น
+- `F14` - วัตถุประสงค์ของ Arguments, Return values, Side effects และอื่น ๆ ถูกอธิบายไว้โดยใช้ [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html) หรือไม่ ?
+- `F15` - ถ้า Function อนุญาต User ดำเนินการ อย่าเข้าใจว่า `msg.sender` คือ User จริง เพราะอาจเป็น Smartcontracts ได้
+- `F16` - ถ้า Smartcontracts ไม่ได้ Requires Arguments ให้ตรวจสอบ Arguments ของ `initialized` เช่น ไม่ควรใช้ `owner == address(0)` หรือเหตุการณ์อื่น ๆ ที่คล้ายกัน
+- `F17` - ใช้ `private` ในกรณีที่ต้องการป้องกันการเข้าถึงจาก Child contracts และใช้ `internal` ในกรณีที่ต้องการป้องกันการเข้าถึงจาก Contracts อื่น ยกเว้น Child contracts
+- `F18` - ใช้ `virtual` ถ้าปลอดภัย เพราะบางที Child contracts อาจทำการ Override การทำงานของ Function
 
 ## Modifiers
 
-- `M1` - Are no storage updates made (except in a reentrancy lock)?
-- `M2` - Are external calls avoided?
-- `M3` - Is the purpose of the modifier and other important information documented using natspec?
+- `M1` - ไม่ทำการแก้ไข Storage (ยกเว้น Reentrancy lock)
+- `M2` - มีการเรียกไปยังภายนอกหรือไม่ ? 
+- `M3` - วัตถุประสงค์ของ Modifiers และอื่น ๆ ถูกอธิบายไว้โดยใช้ [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html)?
 
 ## Code
 
