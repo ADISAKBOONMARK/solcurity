@@ -158,7 +158,7 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 
 ## Project
 
-- `P1` - ใช้ license ที่ถูกต้อง (ต้องใช้ GPL ถ้าหาก Code พัฒนาภายใต้ GPL เป็นต้น).
+- `P1` - ใช้ License ที่ถูกต้อง (ต้องใช้ GPL ถ้าหาก Code พัฒนาภายใต้ GPL เป็นต้น).
 - `P2` - Unit test ทุกสิ่ง
 - `P3` - Fuzz test ให้มาก
 - `P4` - ใช้ Symbolic ในการ Execution ที่เป็นไปได้
