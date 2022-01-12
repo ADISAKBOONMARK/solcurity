@@ -119,47 +119,47 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 
 ## External Calls
 
-- `X1` - Is an external contract call actually needed?
-- `X2` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. (SWC-113)
-- `X3` - Would it be harmful if the call reentered into the current function?
-- `X4` - Would it be harmful if the call reentered into another function?
-- `X5` - Is the result checked and errors dealt with? (SWC-104)
-- `X6` - What if it uses all the gas provided?
+- `X1` - จำเป็นต้องมีการเรียก External contract หรือไม่ ?
+- `X2` - ถ้าหาก Error จะทำให้เกิด DoS หรือไม่ ? เช่น `balanceOf()` reverting ([SWC-113](https://swcregistry.io/docs/SWC-113))
+- `X3` - จะเป็นอันตรายไหมถ้ากลับเข้ามาใหม่ ใน Function ปัจจุบัน ?
+- `X4` - จะเป็นอันตรายไหมถ้ากลับเข้ามาใหม่ ใน Function อื่น ๆ ?
+- `X5` - มีการตรวจสอบผลลัพธ์และข้อผิดพลาด หรือไม่ ? ([SWC-104](https://swcregistry.io/docs/SWC-104))
+- `X6` - เกิดอะไรขึ้นถ้าใช้ Gas ทั้งหมดที่มีให้ ?
 
 ## Static Calls
 
-- `S1` - Is an external contract call actually needed?
-- `S2` - Is it actually marked as view in the interface?
-- `S3` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. (SWC-113)
-- `S4` - If the call entered an infinite loop, could it cause DoS?
+- `S1` - จำเป็นต้องมีการเรียก External contract หรือไม่ ?
+- `S2` - ถูกทำเป็น interface หรือไม่ ?
+- `S3` - ถ้าหาก Error จะทำให้เกิด DoS หรือไม่ ? เช่น `balanceOf()` reverting ([SWC-113](https://swcregistry.io/docs/SWC-113))
+- `S4` - ถ้ามีการเรียกเข้ามาแบบ Infinite loop จะทำให้เกิด DoS หรือไม่ ?
 
 ## Events
 
-- `E1` - Should any fields be indexed?
-- `E2` - Is the creator of the relevant action included as an indexed field?
-- `E3` - Do not index dynamic types like strings or bytes.
-- `E4` - Is when the event emitted and all fields documented using natspec?
-- `E5` - Are all users/ids that are operated on in functions that emit the event stored as indexed fields?
+- `E1` - Fields ใดควรจะเป็น Indexed ?
+- `E2` - ผู้สร้างการดำเนินการที่เกี่ยวข้องรวมอยู่ Fields หรือไม่?
+- `E3` - อย่าสร้าง Index dynamic types เช่น Strings หรือ Bytes
+- `E4` - เมื่อมี Event emitted และ Fields ถูกอธิบายไว้โดยใช้ [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html) หรือไม่ ?
+- `E5` - Users/Ids ทั้งหมด ที่ทำ Functions สำหรับ Operated ถูกจัดเก็บเป็น Index หรือไม่ ?
 
 ## Contract
 
-- `T1` - Use an SPDX license identifier.
-- `T2` - Are events emitted for every storage mutating function?
-- `T3` - Check for correct inheritance, keep it simple and linear. (SWC-125)
-- `T4` - Use a `receive() external payable` function if the contract should accept transferred ETH.
-- `T5` - Write down and test invariants about relationships between stored state.
-- `T6` - Is the purpose of the contract and how it interacts with others documented using natspec?
-- `T7` - The contract should be marked `abstract` if another contract must inherit it to unlock its full functionality.
-- `T8` - Emit an appropriate event for any non-immutable variable set in the constructor that emits an event when mutated elsewhere.
-- `T9` - Avoid over-inheritance as it masks complexity and encourages over-abstraction.
-- `T10` - Always use the named import syntax to explicitly declare which contracts are being imported from another file.
-- `T11` - Group imports by their folder/package. Separate groups with an empty line. Groups of external dependencies should come first, then mock/testing contracts (if relevant), and finally local imports.
-- `T12` - Summarize the purpose and functionality of the contract with a `@notice` natspec comment. Document how the contract interacts with other contracts inside/outside the project in a `@dev` natspec comment.
+- `T1` - ให้ระบุ SPDX license
+- `T2` - มี Events emitted ทุกที่ที่มีการเปลี่ยนแปลง storage หรือไม่ ?
+- `T3` - ตรวจสอบการสืบทอดที่ถูกต้อง ทำให้มันเรียบง่าย ([SWC-125](https://swcregistry.io/docs/SWC-125))
+- `T4` - ใช้ `receive() external payable` Function ถ้า Contract รับ ETH
+- `T5` - เขียนและทดสอบค่าคงที่เกี่ยวกับความสัมพันธ์ระหว่าง Stored state
+- `T6` - วัตถุประสงค์ของ Contract ถูกอธิบายไว้โดยใช้ [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html) หรือไม่ ?
+- `T7` - Contract ควรทำ `abstract` ถ้า Contract อื่น ๆ ต้อง Inherit และปรับแก้ Function
+- `T8` - Emit event ให้เหมาะสมกับ เช่น ตัวแปร Non-immutable ที่ถูกสร้างผ่าน Constructor ทำการ Emit event เมื่อถูกเปลี่ยนค่า
+- `T9` - หลีกเลี่ยง Over-inheritance ซึ่งทำให้เกิดความซับซ้อนและทำให้เกิด Over-abstraction
+- `T10` - ใช้ขื่อ Contract ให้สื่อความหมายเสมอ เมื่อถูก Import ไปยังไฟล์อื่น ๆ จะลดความผิดพลาดในการเข้าใจผิด
+- `T11` - แบ่งกลุ่มในการ Imports ตาม Folder/Package แยกกลุ่ม ด้วย Empty line กลุ่มของ External dependencies ควรมาก่อน จากนั้นเป็น Mock/Testing Contracts (หากเกี่ยวข้อง) และสุดท้าย Local imports
+- `T12` - สรุปวัตถุประสงค์และการทำงานของ Contract ด้วย natspec `@notice` บันทึกการ Interacts กับ Contracts inside/outside ของ Project ไว้ใน natspec `@dev`
 
 ## Project
 
-- `P1` - Use the right license (you must use GPL if you depend on GPL code, etc).
-- `P2` - Unit test everything.
-- `P3` - Fuzz test as much as possible.
-- `P4` - Use symbolic execution where possible.
-- `P5` - Run Slither/Solhint and review all findings.
+- `P1` - ใช้ license ที่ถูกต้อง (ต้องใช้ GPL ถ้าหาก Code พัฒนาภายใต้ GPL เป็นต้น).
+- `P2` - Unit test ทุกสิ่ง
+- `P3` - Fuzz test ให้มาก
+- `P4` - ใช้ Symbolic ในการ Execution ที่เป็นไปได้
+- `P5` - Run Slither/Solhint และ Review ทุกอย่างที่พบ

@@ -120,17 +120,17 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 ## External Calls
 
 - `X1` - Is an external contract call actually needed?
-- `X2` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. (SWC-113)
+- `X2` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. ([SWC-113](https://swcregistry.io/docs/SWC-113))
 - `X3` - Would it be harmful if the call reentered into the current function?
 - `X4` - Would it be harmful if the call reentered into another function?
-- `X5` - Is the result checked and errors dealt with? (SWC-104)
+- `X5` - Is the result checked and errors dealt with? ([SWC-104](https://swcregistry.io/docs/SWC-104))
 - `X6` - What if it uses all the gas provided?
 
 ## Static Calls
 
 - `S1` - Is an external contract call actually needed?
 - `S2` - Is it actually marked as view in the interface?
-- `S3` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. (SWC-113)
+- `S3` - If there is an error, could it cause DoS? Like `balanceOf()` reverting. ([SWC-113](https://swcregistry.io/docs/SWC-113))
 - `S4` - If the call entered an infinite loop, could it cause DoS?
 
 ## Events
@@ -138,17 +138,17 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `E1` - Should any fields be indexed?
 - `E2` - Is the creator of the relevant action included as an indexed field?
 - `E3` - Do not index dynamic types like strings or bytes.
-- `E4` - Is when the event emitted and all fields documented using natspec?
+- `E4` - Is when the event emitted and all fields documented using [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html)?
 - `E5` - Are all users/ids that are operated on in functions that emit the event stored as indexed fields?
 
 ## Contract
 
 - `T1` - Use an SPDX license identifier.
 - `T2` - Are events emitted for every storage mutating function?
-- `T3` - Check for correct inheritance, keep it simple and linear. (SWC-125)
+- `T3` - Check for correct inheritance, keep it simple and linear. ([SWC-125](https://swcregistry.io/docs/SWC-125))
 - `T4` - Use a `receive() external payable` function if the contract should accept transferred ETH.
 - `T5` - Write down and test invariants about relationships between stored state.
-- `T6` - Is the purpose of the contract and how it interacts with others documented using natspec?
+- `T6` - Is the purpose of the contract and how it interacts with others documented using [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html)?
 - `T7` - The contract should be marked `abstract` if another contract must inherit it to unlock its full functionality.
 - `T8` - Emit an appropriate event for any non-immutable variable set in the constructor that emits an event when mutated elsewhere.
 - `T9` - Avoid over-inheritance as it masks complexity and encourages over-abstraction.
