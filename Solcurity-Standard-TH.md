@@ -25,7 +25,6 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `V3` - สามารถเป็น `immutable` ได้หรือไม่ ?
 - `V4` - การตั้งค่าการมองเห็นของตัวแปร ([SWC-108](https://swcregistry.io/docs/SWC-108))
 - `V5` - วัตถุประสงค์ของตัวแปรและข้อมูลสำคัญอื่น ๆ ถูกอธิบายไว้โดยใช้ [Natspec](https://docs.soliditylang.org/en/v0.8.10/natspec-format.html) หรือไม่ ?
-
 - `V6` - สามารถ Optimize Code ได้หรือไม่ ([adjacent storage variable](https://docs.microsoft.com/en-us/cpp/c-language/storage-and-alignment-of-structures?view=msvc-170)) ?
 - `V7` - สามารถ Packed ตัวแปรลงใน Struct ได้หรือไม่ ?
 - `V8` - ใช้ตัวแปรได้เต็มประสิทธิภาพหรือไม่ ?
@@ -68,55 +67,55 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 ## Code
 
 - `C1` - ใช้ SafeMath หรือ Solidity 0.8.x สำหรับตรวจสอบ Math ? ([SWC-101](https://swcregistry.io/docs/SWC-101))
-- `C2` - Are any storage slots read multiple times?
-- `C3` - Are any unbounded loops/arrays used that can cause DoS? ([SWC-128](https://swcregistry.io/docs/SWC-128))
-- `C4` - Use `block.timestamp` only for long intervals. ([SWC-116](https://swcregistry.io/docs/SWC-116))
-- `C5` - Don't use block.number for elapsed time. ([SWC-116](https://swcregistry.io/docs/SWC-116))
-- `C7` - Avoid delegatecall wherever possible, especially to external (even if trusted) contracts. ([SWC-112](https://swcregistry.io/docs/SWC-112))
-- `C8` - Do not update the length of an array while iterating over it.
-- `C9` - Don't use `blockhash()`, etc for randomness. ([SWC-120](https://swcregistry.io/docs/SWC-120))
-- `C10` - Are signatures protected against replay with a nonce and `block.chainid` ([SWC-121](https://swcregistry.io/docs/SWC-121))
-- `C11` - Ensure all signatures use EIP-712. ([SWC-117](https://swcregistry.io/docs/SWC-117) [SWC-122](https://swcregistry.io/docs/SWC-122))
-- `C12` - Output of `abi.encodePacked()` shouldn't be hashed if using >2 dynamic types. Prefer using `abi.encode()` in general. ([SWC-133](https://swcregistry.io/docs/SWC-133))
-- `C13` - Careful with assembly, don't use any arbitrary data. ([SWC-127](https://swcregistry.io/docs/SWC-127))
-- `C14` - Don't assume a specific ETH balance. ([SWC-132](https://swcregistry.io/docs/SWC-132))
-- `C15` - Avoid insufficient gas griefing. ([SWC-126](https://swcregistry.io/docs/SWC-126))
-- `C16` - Private data isn't private. ([SWC-136](https://swcregistry.io/docs/SWC-136))
-- `C17` - Updating a struct/array in memory won't modify it in storage.
-- `C18` - Never shadow state variables. ([SWC-119](https://swcregistry.io/docs/SWC-119))
-- `C19` - Do not mutate function parameters.
-- `C20` - Is calculating a value on the fly cheaper than storing it?
-- `C21` - Are all state variables read from the correct contract (master vs. clone)?
-- `C22` - Are comparison operators used correctly (`>`, `<`, `>=`, `<=`), especially to prevent off-by-one errors?
-- `C23` - Are logical operators used correctly (`==`, `!=`, `&&`, `||`, `!`), especially to prevent off-by-one errors?
-- `C24` - Always multiply before dividing, unless the multiplication could overflow.
-- `C25` - Are magic numbers replaced by a constant with an intuitive name?
-- `C26` - If the recipient of ETH had a fallback function that reverted, could it cause DoS? ([SWC-113](https://swcregistry.io/docs/SWC-113))
-- `C27` - Use SafeERC20 or check return values safely.
-- `C28` - Don't use `msg.value` in a loop.
-- `C29` - Don't use `msg.value` if recursive delegatecalls are possible (like if the contract inherits `Multicall`/`Batchable`).
-- `C30` - Don't assume `msg.sender` is always a relevant user.
-- `C31` - Don't use `assert()` unless for fuzzing or formal verification. ([SWC-110](https://swcregistry.io/docs/SWC-110))
-- `C32` - Don't use `tx.origin` for authorization. ([SWC-115](https://swcregistry.io/docs/SWC-115))
-- `C33` - Don't use `address.transfer()` or `address.send()`. Use `.call.value(...)("")` instead. (SWC-134)
-- `C34` - When using low-level calls, ensure the contract exists before calling.
-- `C35` - When calling a function with many parameters, use the named argument syntax.
-- `C36` - Do not use assembly for create2. Prefer the modern salted contract creation syntax.
-- `C37` - Do not use assembly to access chainid or contract code/size/hash. Prefer the modern Solidity syntax.
-- `C38` - Use the `delete` keyword when setting a variable to a zero value (`0`, `false`, `""`, etc).
-- `C39` - Comment the "why" as much as possible. 
-- `C40` - Comment the "what" if using obscure syntax or writing unconventional code.
-- `C41` - Comment explanations + example inputs/outputs next to complex and fixed point math.
-- `C42` - Comment explanations wherever optimizations are done, along with an estimate of much gas they save.
-- `C43` - Comment explanations wherever certain optimizations are purposely avoided, along with an estimate of much gas they would/wouldn't save if implemented.
-- `C44` - Use `unchecked` blocks where overflow/underflow is impossible, or where an overflow/underflow is unrealistic on human timescales (counters, etc). Comment explanations wherever `unchecked` is used, along with an estimate of how much gas it saves (if relevant).
-- `C45` - Do not depend on Solidity's arithmetic operator precedence rules. In addition to the use of parentheses to override default operator precedence, parentheses should also be used to emphasise it.
-- `C46` - Expressions passed to logical/comparison operators (`&&`/`||`/`>=`/`==`/etc) should not have side-effects.
-- `C47` - Wherever arithmetic operations are performed that could result in precision loss, ensure it benefits the right actors in the system, and document it with comments. 
-- `C48` - Document the reason why a reentrancy lock is necessary whenever it's used with an inline or `@dev` natspec comment.
-- `C49` - When fuzzing functions that only operate on specific numerical ranges use modulo to tighten the fuzzer's inputs (such as `x = x % 10000 + 1` to restrict from 1 to 10,000).
-- `C50` - Use ternary expressions to simplify branching logic wherever possible.
-- `C51` - When operating on more than one address, ask yourself what happens if they're the same.
+- `C2` - Storage ถูกเรียกหลายครั้งหรือไม่ ?
+- `C3` - มีการใช้งาน Loops/Arrays มาก ๆ หรือไม่ ? อาจทำให้เกิด DoS ([SWC-128](https://swcregistry.io/docs/SWC-128))
+- `C4` - ใช้ `block.timestamp` เฉพาะช้วงเวลาเท่านั้น ([SWC-116](https://swcregistry.io/docs/SWC-116))
+- `C5` - ไม่ใช้ block.number สำหรับเวลาที่ผ่านไป ([SWC-116](https://swcregistry.io/docs/SWC-116))
+- `C7` - หลีกเลี่ยงการ delegatecall ในทุกที่ที่ทำได้ โดยเฉพาะกับ Contracts ภายนอก (แม้ว่าจะเชื่อถือได้ก็ตาม) ([SWC-112](https://swcregistry.io/docs/SWC-112))
+- `C8` - อย่าอัปเดต Length ของ Arrays ขณะวนซ้ำ
+- `C9` - ไม่ใช้ `blockhash()` สำหรับ Randomness ([SWC-120](https://swcregistry.io/docs/SWC-120))
+- `C10` - Signatures ได้รับการป้องกันจากการทำซ้ำด้วย nonce และ `block.chainid` ([SWC-121](https://swcregistry.io/docs/SWC-121))
+- `C11` - ตรวจสอบให้แน่ใจว่า Signatures ทั้งหมดใช้ EIP-712. ([SWC-117](https://swcregistry.io/docs/SWC-117) [SWC-122](https://swcregistry.io/docs/SWC-122))
+- `C12` - ผลลัพธ์ของ `abi.encodePacked()` ไม่ควร hashed ถ้าใช้มากกว่า 2 dynamic ให้ใช้ `abi.encode()` แทน ([SWC-133](https://swcregistry.io/docs/SWC-133))
+- `C13` - ระวังกับ Assembly ไม่ใช้ข้อมูลใด ๆ โดยพลการ ([SWC-127](https://swcregistry.io/docs/SWC-127))
+- `C14` - อย่าถือว่ายอดคงเหลือ ETH เป็นแบบเฉพาะเจาะจง ([SWC-132](https://swcregistry.io/docs/SWC-132))
+- `C15` - หลีกเลี่ยงการ Function ที่ใช้ Gas มากจนเกินไป ([SWC-126](https://swcregistry.io/docs/SWC-126))
+- `C16` - Private data ไม่เป็น Private. ([SWC-136](https://swcregistry.io/docs/SWC-136))
+- `C17` - การอัปเดต struct/array ใน memory จะไม่ถูกแทนที่ใน storage
+- `C18` - ไม่ประกาศตัวแปรถ้าไม่ได้ใช้งาน ([SWC-119](https://swcregistry.io/docs/SWC-119))
+- `C19` - ไม่เปลี่ยนแปลงตัวแปร Function
+- `C20` - การคำนวณมูลค่าทันทีถูกกว่าการจัดเก็บหรือไม่ ?
+- `C21` - ตัวแปรถูกอ่านจาก Contract ปัจจุบันหรือไม่ ? (master vs. clone)
+- `C22` - ใช้ตัวดำเนินการเปรียบเทียบอย่างถูกต้อง (`>`, `<`, `>=`, `<=`) โดยเฉพาะอย่างยิ่งกับการป้องกันข้อผิดพลาด
+- `C23` - ใช้ตัวดำเนินการเชิงตรรกะอย่างถูกต้อง (`==`, `!=`, `&&`, `||`, `!`) โดยเฉพาะอย่างยิ่งกับการป้องกันข้อผิดพลาด
+- `C24` - คูณก่อนหารเสมอ เว้นแต่การคูณมีโอกาส overflow
+- `C25` - Magic numbers ถูกแทนที่ด้วยค่าคงที่ด้วยชื่อที่เข้าใจได้ง่ายหรือไม่ ?
+- `C26` - หากผู้รับ ETH มีฟังก์ชัน fallback เพื่อตอบกลับ จะทำให้เกิด DoS ได้หรือไม่ ? ([SWC-113](https://swcregistry.io/docs/SWC-113))
+- `C27` - ใข้ SafeERC20 หรือตรวจสอบค่าที่ส่งคืนได้อย่างปลอดภัย
+- `C28` - ไม่ใช้ `msg.value` ใน Loop
+- `C29` - ไม่ใช้ `msg.value` หาก Recursive delegatecalls ถ้าเป็นไปได้ (เช่น ถ้า Contract inherits `Multicall`/`Batchable`).
+- `C30` - อย่าเข้าใจว่า `msg.sender` คือ User จริง เพราะอาจเป็น Smartcontracts ได้
+- `C31` - ไม่ใช้ `assert()` เว้นแต่เพื่อการตรวจสอบที่คลุมเครือหรือเป็นทางการ ([SWC-110](https://swcregistry.io/docs/SWC-110))
+- `C32` - ไม่ใช้ `tx.origin` ในการ Authorization ([SWC-115](https://swcregistry.io/docs/SWC-115))
+- `C33` - ไม่ใช้ `address.transfer()` หรือ `address.send()` ใช้ `.call.value(...)("")` แทน ([SWC-134](https://swcregistry.io/docs/SWC-134))
+- `C34` - เมื่อใช้ Low-level calls ต้องแน่ใจว่า Contract มีอยู่ก่อนการโทร
+- `C35` - เมื่อเรียก Function ด้วย Parameters หลาย ๆ ตัว ใช้ชื่อที่สื่อความหมายชัดเจน
+- `C36` - ไม่ใช้ Assembly สำหรับ create2 เสนอให้ใช้ Syntax ที่ทันสมัยกว่า
+- `C37` - ไม่ใช้ Assembly เพื่อเข้าถึง chainid หรือ Contract code/size/hash เสนอให้ใช้ Syntax ที่ทันสมัยกว่า
+- `C38` - ใช้ `delete` คีย์เวิร์ดเมื่อตั้งค่าตัวแปรให้เป็นค่าศูนย์ (`0`, `false`, `""`, อื่น ๆ)
+- `C39` - Comment ว่า "why" ให้มากที่สุด
+- `C40` - Comment ว่า "what" หากใช้ Syntax ที่คลุมเครือ หรือเขียน Code ที่แปลกไปจาก Case อื่น ๆ
+- `C41` - Comment คำอธิบาย + ตัวอย่าง Inputs/Outputs ต่อจากสมการเชิงคณิตศาสตร์ที่ซับซ้อน
+- `C42` - Comment คำอธิบาย ทุกที่ที่สามารถ Optimizations ได้ พร้อมกับการประมาณการของ Gas ที่ประหยัดได้
+- `C43` - Comment คำอธิบาย ทุกที่ที่จงใจหลีกเลี่ยงการ Optimizations พร้อมกับการประมาณการของ Gas ที่จะไม่ประหยัด
+- `C44` - ใช้ `unchecked` ที่ไหนที่ Overflow/Underflow เป็นไปไม่ได้ หรือที่ไหนที่ Overflow/Underflow ไม่สมเหตุสมผลต่อการใช้งานของผู้ใช้ (counters, อื่น ๆ). Comment คำอธิบาย ทุกที่ที่สามารถ `unchecked` พร้อมกับการประมาณการของ Gas ที่ประหยัดได้ (หากเกี่ยวข้อง).
+- `C45` - อย่าพึ่งพากฎการมาก่อนตัวดำเนินการเลขคณิตของ Solidity นอกจากการใช้วงเล็บเพื่อลบล้างลำดับความสำคัญของตัวดำเนินการเริ่มต้นแล้ว ควรใช้วงเล็บเพื่อเน้นย้ำด้วย
+- `C46` - Logical/Comparison operators (`&&`/`||`/`>=`/`==`/ อื่น ๆ) ไม่ควรมี Side-effects.
+- `C47` - ทุกที่ที่มีการดำเนินการทางคณิตศาสตร์ที่อาจส่งผลให้เกิดการสูญเสีย ตรวจสอบให้แน่ใจว่าเป็นประโยชน์ต่อ Actors ในระบบ และจัดทำเป็นเอกสารพร้อมข้อคิดเห็น
+- `C48` - Comment เหตุผลว่าทำไมต้องใช้ Reentrancy lock ในที่ที่จำเป็นต้องใช้ ใน natspec `@dev`
+- `C49` - เมื่อใช้ fuzzing functions เพื่อดำเนินการเฉพาะ เช่น Numerical ranges ใช้ Modulo สำหรับ fuzzer's inputs (เช่น `x = x % 10000 + 1` จำกัด  1 ถึง 10,000)
+- `C50` - ใช้ Ternary แทนในการอธิบาย logic ที่เข้าใจง่าย 
+- `C51` - เมื่อ Operating address มากกว่าหนึ่ง ให้ตั้งคำถามเสมอว่าถ้าหากพวกเข้าเป็นคนเดียวกันหรือ Address เดียวกัน
 
 ## External Calls
 

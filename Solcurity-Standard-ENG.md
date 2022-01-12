@@ -97,7 +97,7 @@ _Based off work by [BoringCrypto](https://github.com/sushiswap/bentobox/blob/mas
 - `C30` - Don't assume `msg.sender` is always a relevant user.
 - `C31` - Don't use `assert()` unless for fuzzing or formal verification. ([SWC-110](https://swcregistry.io/docs/SWC-110))
 - `C32` - Don't use `tx.origin` for authorization. ([SWC-115](https://swcregistry.io/docs/SWC-115)) 
-- `C33` - Don't use `address.transfer()` or `address.send()`. Use `.call.value(...)("")` instead. (SWC-134)
+- `C33` - Don't use `address.transfer()` or `address.send()`. Use `.call.value(...)("")` instead. ([SWC-134](https://swcregistry.io/docs/SWC-134))
 - `C34` - When using low-level calls, ensure the contract exists before calling.
 - `C35` - When calling a function with many parameters, use the named argument syntax.
 - `C36` - Do not use assembly for create2. Prefer the modern salted contract creation syntax.
